@@ -1,0 +1,38 @@
+# Updated ~/.config/borgmatic/config.yaml
+location:
+    source_directories:
+        - ~/backup
+    # one_file_system: true
+
+    repositories:
+        - ssh://qip18g.repo.borgbase.com/./repo
+
+    exclude_caches: true
+
+storage:
+    compression: auto,zstd
+    encryption_passphrase: '12345'
+    archive_name_format: 'caddy-{now}'
+
+    # Number of times to retry a failing backup
+    # Needs recent Borgmatic version
+#    retries: 5
+#    retry_wait: 5
+
+retention:
+    prefix: caddy-
+    keep_daily: 3
+    keep_weekly: 4
+    keep_monthly: 12
+
+consistency:
+    checks:
+      - disabled
+      # Uncomment to regularly read all repo data
+      # Needs recent Borgmatic version
+      # - name: repository
+      #   frequency: 4 weeks
+      # - name: archives
+      #   frequency: 8 weeks
+
+    check_last: 3
